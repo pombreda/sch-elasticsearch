@@ -27,8 +27,16 @@
 # only run the ebs recipie if we're running on EC2
 if node.attribute?('cloud') && node['cloud']['provider'] == "ec2"
   include_recipe "elasticsearch::ebs"
+
+  # create directory for ES data
+  include_recipe "elasticsearch::data"
+  
 end
 
-include_recipe "elasticsearch::data",
-include_recipe "elasticsearch::default",
+
+
+# main setup
+include_recipe "elasticsearch::default"
+
+# plugin install
 include_recipe "elasticsearch::plugins"
