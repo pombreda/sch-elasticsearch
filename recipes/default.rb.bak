@@ -24,10 +24,20 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+# only run the ebs recipe if we're running on EC2
 if node.attribute?('cloud') && node['cloud']['provider'] == "ec2"
   include_recipe "elasticsearch::ebs"
 end
 
-include_recipe "elasticsearch::data",
-include_recipe "elasticsearch::default",
+include_recipe "elasticsearch::data"
+include_recipe "elasticsearch::default"
 include_recipe "elasticsearch::plugins"
+
+#override the logging template with our version, which has a 7 day rotation
+template "logging.yml" do
+  path   "#{node['elasticsearch']['path']['conf']}/logging.yml"
+  source "logging.yml.erb"
+  owner  node['elasticsearch']['user'] and group node['elasticsearch']['user'] and mode 0755
+
+  notifies :restart, 'service[elasticsearch]' unless node.elasticsearch['skip_restart']
+end
