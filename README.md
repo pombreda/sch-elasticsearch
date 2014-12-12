@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/davidski/sch-elasticsearch.png)](http://travis-ci.org/davidski/sch-elasticsearch)
+
 # sch-elasticsearch cookbook
 
 # Requirements
