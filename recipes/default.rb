@@ -24,8 +24,10 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+include_recipe 'chef-sugar::default'
+
 # only run the ebs recipe if we're running on EC2
-if node.attribute?('cloud') && node['cloud']['provider'] == "ec2"
+if node.attribute?('cloud') and node['cloud']['provider'] == "ec2" and !node.deep_fetch('elasticsearch', 'data', 'devices', 'ebs').nil?
   include_recipe "elasticsearch::ebs"
 end
 

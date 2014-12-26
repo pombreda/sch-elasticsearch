@@ -4,6 +4,7 @@ maintainer_email 'davidski@deadheaven.com'
 license          'MIT'
 description      'Installs/Configures Elasticsearch'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.1.0'
+version          '0.1.1'
 
 depends 'elasticsearch', ">= 0.3.8"
+depends 'chef-sugar'
