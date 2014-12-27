@@ -26,13 +26,15 @@
 
 instance_storage = ["/dev/xvdb", "/dev/xvdc"]
 Chef::Log.warn("instance storage array is: #{instance_storage}")
+mnt_index = 1
 
 instance_storage.each do |dv|
-  Chef::Log.warn("Unmounting device: #{dv}")
-  mount dv do
+  Chef::Log.warn("Unmounting device: #{dv} at /mnt/ephemeral#{mnt_index}")
+  mount "/mnt/ephemeral#{mnt_index}" do
     device dv
     action [ :umount, :disable ]
   end
+  mnt_index = mnt_index + 1
 end
 
 mdadm "/dev/md0" do
