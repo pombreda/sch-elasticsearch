@@ -24,13 +24,13 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-instance_storage = [ "/dev/xvdb", "/dev/xvdc" ]
+instance_storage = ["/dev/xvdb", "/dev/xvdc"]
 
-instance_storage.each do |dev|
-  Chef::Log.warn("Unmounting device: #{dev}")
-  mount dev do
-    device dev
-    action :umount
+instance_storage.each do |dv|
+  Chef::Log.warn("Unmounting device: #{dv}")
+  mount dv do
+    device dv
+    action [ :umount, :disable ]
   end
 end
 
