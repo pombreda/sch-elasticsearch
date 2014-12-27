@@ -25,6 +25,7 @@
 #
 
 instance_storage = ["/dev/xvdb", "/dev/xvdc"]
+Chef::Log.warn("instance storage array is: #{dv}")
 
 instance_storage.each do |dv|
   Chef::Log.warn("Unmounting device: #{dv}")
