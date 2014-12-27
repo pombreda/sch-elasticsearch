@@ -27,6 +27,7 @@
 instance_storage = [ "/dev/xvdb", "/dev/xvdc" ]
 
 instance_storage.each do |dev|
+  Chef::Log.warn("Unmounting device: #{dev}")
   mount dev do
     device dev
     action :umount
