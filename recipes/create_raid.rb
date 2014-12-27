@@ -24,12 +24,17 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-mount "/dev/xvdb" do
-  action :umount
+instance_storage = [ "/dev/xvdb", "/dev/xvdc" ]
+
+instance_storage.each do |dev|
+  mount dev do
+    device dev
+    action :umount
+  end
 end
 
 mdadm "/dev/md0" do
-  devices [ "/dev/xvdb", "/dev/xvdc" ]
+  devices instance_storage
   level 0
   action [ :create, :assemble ]
 end
