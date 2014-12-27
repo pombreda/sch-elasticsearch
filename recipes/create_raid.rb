@@ -24,6 +24,10 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+mount "/dev/xvdb" do
+  action :umount
+end
+
 mdadm "/dev/md0" do
   devices [ "/dev/xvdb", "/dev/xvdc" ]
   level 0
