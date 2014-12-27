@@ -30,7 +30,7 @@ mnt_index = 0
 
 instance_storage.each do |dv|
   Chef::Log.warn("Unmounting device: #{dv} at /mnt/ephemeral#{mnt_index}")
-  mount "/mnt/ephemeral#{mnt_index}" do
+  mount "/media/ephemeral#{mnt_index}" do
     device dv
     action [ :umount, :disable ]
   end
